@@ -12,14 +12,10 @@ public class SuperSweetStackImpl implements SweetStack {
     }
 
     int numberOfNodes;
-    int currentMax;
     Node head;
 
     @Override
     public void push(int val) {
-        if (currentMax < val) {
-            currentMax = val;
-        }
         Node node = new Node();
         node.value = val;
         node.next = head;
@@ -46,6 +42,19 @@ public class SuperSweetStackImpl implements SweetStack {
 
     @Override
     public int max() {
-        return currentMax;
+        return getMax(head, head.value);
+    }
+
+    private int getMax(Node listNode, int maxValue) {
+        if (listNode.next == null) {
+            return maxValue;
+        } else {
+            if (listNode.value > maxValue) {
+                return getMax(listNode.next, listNode.value);
+            } else {
+                return getMax(listNode.next, maxValue);
+            }
+        }
+
     }
 }

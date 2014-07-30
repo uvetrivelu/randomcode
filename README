@@ -33,3 +33,7 @@ abc / asocabchjabjhabcjahbcab => true
 abcc / abc => false
 abcc / abcd => false
 abcc / abcccdd => true
+
+5. A Stack data structure implementation for primitive int values with the following requirements:
+    *  There should be no limit to the amount of nodes that are placed into the stack.
+    *  The Stack should implement the following interface all with O(1) complexity.
