@@ -4,6 +4,7 @@ package example.ex5.src;
  * Another implementation of SweetStack interface. Uses Linkedlist-like private data structure for manipulating
  * values in stack like fashion.
  */
+
 public class SuperSweetStackImpl implements SweetStack {
 
     private class Node {
@@ -13,6 +14,17 @@ public class SuperSweetStackImpl implements SweetStack {
 
     int numberOfNodes;
     Node head;
+    Node maxHead;
+
+    public SuperSweetStackImpl(int value) {
+        this.head = new Node();
+        this.head.value = value;
+        this.head.next = null;
+        this.maxHead = new Node();
+        this.maxHead.value = value;
+        this.maxHead.next = null;
+        ++numberOfNodes;
+    }
 
     @Override
     public void push(int val) {
@@ -20,6 +32,14 @@ public class SuperSweetStackImpl implements SweetStack {
         node.value = val;
         node.next = head;
         head = node;
+
+        if (maxHead.value < val) {
+            Node newMaxNode = new Node();
+            newMaxNode.value = val;
+            newMaxNode.next = maxHead;
+            maxHead = newMaxNode;
+        }
+
         numberOfNodes++;
         return;
     }
@@ -32,6 +52,9 @@ public class SuperSweetStackImpl implements SweetStack {
         int currentValue = head.value;
         head = head.next;
         numberOfNodes--;
+        if (maxHead != null && maxHead.value == currentValue) {
+            maxHead = maxHead.next;
+        }
         return currentValue;
     }
 
@@ -42,19 +65,7 @@ public class SuperSweetStackImpl implements SweetStack {
 
     @Override
     public int max() {
-        return getMax(head, head.value);
+        return maxHead.value;
     }
 
-    private int getMax(Node listNode, int maxValue) {
-        if (listNode.next == null) {
-            return maxValue;
-        } else {
-            if (listNode.value > maxValue) {
-                return getMax(listNode.next, listNode.value);
-            } else {
-                return getMax(listNode.next, maxValue);
-            }
-        }
-
-    }
 }
