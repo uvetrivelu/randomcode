@@ -64,8 +64,15 @@ public class SuperSweetStackImpl implements SweetStack {
     }
 
     @Override
+    /*
+    Returns max element if present, if not present, returns -1.
+     */
     public int max() {
-        return maxHead.value;
+        if (maxHead != null) {
+            return maxHead.value;
+        } else {
+            return -1;
+        }
     }
 
 }
