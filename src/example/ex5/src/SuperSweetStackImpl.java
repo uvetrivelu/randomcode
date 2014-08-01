@@ -16,6 +16,9 @@ public class SuperSweetStackImpl implements SweetStack {
     Node head;
     Node maxHead;
 
+    private SuperSweetStackImpl() {
+    }
+
     public SuperSweetStackImpl(int value) {
         this.head = new Node();
         this.head.value = value;
@@ -41,7 +44,6 @@ public class SuperSweetStackImpl implements SweetStack {
         }
 
         numberOfNodes++;
-        return;
     }
 
     @Override
@@ -68,11 +70,7 @@ public class SuperSweetStackImpl implements SweetStack {
     Returns max element if present, if not present, returns -1.
      */
     public int max() {
-        if (maxHead != null) {
-            return maxHead.value;
-        } else {
-            return -1;
-        }
+        return maxHead != null ? maxHead.value : -1;
     }
 
 }
